@@ -4,6 +4,32 @@
  * or redistributed without prior written permission. See LICENSE.
  */
 /* ============================
+   N8N AUTOMATION CONFIG
+   After creating your n8n Cloud instance, set N8N_BASE to your instance's
+   webhook base, e.g. "https://YOURNAME.app.n8n.cloud/webhook".
+   Leave it "" to fully disable network posting (forms keep working as before).
+   The paths must match the webhook nodes in the imported workflows.
+============================ */
+const N8N_BASE = "https://nikitazakaidze.app.n8n.cloud/webhook";
+const N8N = {
+  signup:  N8N_BASE ? N8N_BASE + "/vb-signup"  : "",
+  form:    N8N_BASE ? N8N_BASE + "/vb-form"     : "",
+  contact: N8N_BASE ? N8N_BASE + "/vb-contact"  : "",
+  booking: N8N_BASE ? N8N_BASE + "/vb-booking"  : "",
+};
+// Fire-and-forget POST; never blocks the UI and never throws to the caller.
+function n8nPost(url, data) {
+  if (!url) return Promise.resolve();
+  return fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+    keepalive: true,
+    mode: "cors",
+  }).catch((err) => { if (window.console) console.warn("n8n post failed:", err); });
+}
+
+/* ============================
    THEME (light / dark) — runs immediately to minimise flash.
    An inline snippet in each page's <head> handles the *initial*
    paint; this block owns the toggle button and persistence.
@@ -656,6 +682,7 @@ if (authForm) {
 
         const userCred = await auth.createUserWithEmailAndPassword(email, password);
         await userCred.user.sendEmailVerification();
+        n8nPost(N8N.signup, { email }); // CP2: create client row (status Registered)
         authMessage.textContent = "Verification email sent. Check spam folder.";
       } else {
         const userCred = await auth.signInWithEmailAndPassword(email, password);
@@ -775,8 +802,18 @@ if (forgotPassword) {
         // thank-you so automated probes can't distinguish accept from reject.
         if (window.console) console.warn("Submission blocked:", reason);
         form.reset();
+      } else {
+        // Real submission → n8n webhook (creates/updates the client's Notion row).
+        const sourceMap = {
+          eligibilityForm: "eligibility",
+          consultationForm: "consultation",
+          programOverviewForm: "program-overview",
+        };
+        const data = Object.fromEntries(new FormData(form).entries());
+        delete data.company_website; // honeypot — never forward it
+        data.source = sourceMap[id] || "form";
+        n8nPost(N8N.form, data); // fire-and-forget; UI proceeds regardless
       }
-      // else: TODO wire real backend POST here (and re-check isSpam() server-side).
 
       form.setAttribute("hidden", "");
       thankYou.removeAttribute("hidden");
