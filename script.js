@@ -812,7 +812,17 @@ if (forgotPassword) {
         const data = Object.fromEntries(new FormData(form).entries());
         delete data.company_website; // honeypot — never forward it
         data.source = sourceMap[id] || "form";
-        n8nPost(N8N.form, data); // fire-and-forget; UI proceeds regardless
+        // Route each form to its workflow:
+        //   eligibility  → WF3 (contact auto-reply + escalate)
+        //   consultation → WF4 (booking calendar + .ics)
+        //   program-overview → WF2 (forms-to-notion)
+        const endpointMap = {
+          eligibilityForm: N8N.contact,
+          consultationForm: N8N.booking,
+          programOverviewForm: N8N.form,
+        };
+        const endpoint = endpointMap[id] || N8N.form;
+        n8nPost(endpoint, data); // fire-and-forget; UI proceeds regardless
       }
 
       form.setAttribute("hidden", "");
