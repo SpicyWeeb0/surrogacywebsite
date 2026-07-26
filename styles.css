@@ -67,6 +67,13 @@ body {
   body, a, button, input, textarea, select, label {
     cursor: none;
   }
+  /* admin.html doesn't load script.js (no lux-cursor JS), so it needs the real cursor. */
+  body.admin-page, body.admin-page input, body.admin-page textarea, body.admin-page select {
+    cursor: auto;
+  }
+  body.admin-page a, body.admin-page button, body.admin-page label {
+    cursor: pointer;
+  }
 }
 
 /* Refined selection colour */
