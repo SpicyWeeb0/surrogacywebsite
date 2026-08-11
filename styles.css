@@ -23,8 +23,8 @@
   --gray-50: #EAE3D9;
   --gray-100: #E0D8CC;
   --gray-200: #C9BFAF;
-  --gray-400: #6A7C73;
-  --gray-600: #6A7C73;
+  --gray-400: #3F5249;
+  --gray-600: #3F5249;
   --gray-800: #2F3A34;
   --deep: #1A2420;
   --accent: #C2A878;
@@ -56,7 +56,7 @@ body {
   background: var(--off-white);
   color: var(--gray-800);
   line-height: 1.8;
-  font-weight: 300;
+  font-weight: 400;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -655,7 +655,7 @@ body.on-dark-section.lux-hover #lux-cursor-ring { border-color: rgba(194,168,120
 .hero-note {
   margin-top: 1.5rem;
   font-size: 0.68rem;
-  font-weight: 300;
+  font-weight: 400;
   color: var(--gray-400);
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -753,8 +753,8 @@ body.on-dark-section.lux-hover #lux-cursor-ring { border-color: rgba(194,168,120
 }
 
 .page-hero p {
-  font-size: 0.95rem;
-  font-weight: 300;
+  font-size: 1rem;
+  font-weight: 400;
   color: var(--gray-600);
   max-width: 580px;
   margin-bottom: 0.85rem;
@@ -852,8 +852,8 @@ body.on-dark-section.lux-hover #lux-cursor-ring { border-color: rgba(194,168,120
 }
 
 .section-text {
-  font-size: 0.95rem;
-  font-weight: 300;
+  font-size: 1rem;
+  font-weight: 400;
   color: var(--gray-600);
   max-width: 620px;
   margin-bottom: 1.1rem;
@@ -909,8 +909,8 @@ main p a:hover:not(.btn):not(.insight-link):not(.nav-link) {
 }
 
 .section-note {
-  font-size: 0.82rem;
-  font-weight: 300;
+  font-size: 0.85rem;
+  font-weight: 400;
   color: var(--gray-400);
   font-style: italic;
   margin-top: 2rem;
@@ -1112,8 +1112,8 @@ main p a:hover:not(.btn):not(.insight-link):not(.nav-link) {
   padding: 0.35rem 0;
   padding-left: 1rem;
   position: relative;
-  font-size: 0.82rem;
-  font-weight: 300;
+  font-size: 0.85rem;
+  font-weight: 400;
   color: var(--gray-600);
   line-height: 1.65;
 }
@@ -1129,8 +1129,8 @@ main p a:hover:not(.btn):not(.insight-link):not(.nav-link) {
 }
 
 .program-suited {
-  font-size: 0.75rem;
-  font-weight: 300;
+  font-size: 0.78rem;
+  font-weight: 400;
   color: var(--gray-400);
   font-style: italic;
   padding-top: 1rem;
@@ -1217,8 +1217,8 @@ main p a:hover:not(.btn):not(.insight-link):not(.nav-link) {
 .comparison-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.82rem;
-  font-weight: 300;
+  font-size: 0.85rem;
+  font-weight: 400;
 }
 
 .comparison-table th,
@@ -2099,8 +2099,8 @@ main p a:hover:not(.btn):not(.insight-link):not(.nav-link) {
 
 .insight-featured p {
   color: var(--gray-600);
-  font-size: 0.92rem;
-  font-weight: 300;
+  font-size: 0.95rem;
+  font-weight: 400;
   line-height: 1.9;
   margin-bottom: 1.25rem;
   max-width: 540px;
@@ -2162,8 +2162,8 @@ main p a:hover:not(.btn):not(.insight-link):not(.nav-link) {
 }
 
 .insight-card p {
-  font-size: 0.88rem;
-  font-weight: 300;
+  font-size: 0.9rem;
+  font-weight: 400;
   color: var(--gray-600);
   margin-bottom: 1.5rem;
   line-height: 1.8;
