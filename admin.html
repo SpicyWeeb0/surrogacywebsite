@@ -86,15 +86,15 @@
   <script>
     /* ============================
        CONFIG
-       ADMIN_EMAIL: the only account allowed to view this page.
+       ADMIN_EMAILS: the only accounts allowed to view this page.
        LOOKER_STUDIO_EMBED_URL: from Looker Studio, File > Embed report >
        Enable embedding > copy the embed URL (looks like
        https://lookerstudio.google.com/embed/reporting/<reportId>/page/<pageId>).
-       The report itself should stay privately shared to ADMIN_EMAIL's Google
+       The report itself should stay privately shared to each ADMIN_EMAILS
        account, not "Anyone with the link" — this page's Firebase gate only
        controls page access, not the underlying GA4 data.
     ============================ */
-    const ADMIN_EMAIL = "nikita.zakaidze@gmail.com";
+    const ADMIN_EMAILS = ["nikita.zakaidze@gmail.com", "d@vitabridgeconsulting.net"];
     const LOOKER_STUDIO_EMBED_URL = "https://datastudio.google.com/embed/reporting/8ed2157c-b0e0-4349-ad19-9e20a1f699bc/page/Wco4F";
 
     const firebaseConfig = {
@@ -139,7 +139,7 @@
     });
 
     auth.onAuthStateChanged((user) => {
-      if (user && user.emailVerified && user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
+      if (user && user.emailVerified && ADMIN_EMAILS.includes(user.email.toLowerCase())) {
         signedOutEl.hidden = true;
         dashboardEl.hidden = false;
         if (!analyticsEmbed.src) analyticsEmbed.src = LOOKER_STUDIO_EMBED_URL;
